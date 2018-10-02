@@ -32,12 +32,122 @@ package ru.ifmo.cet.javabasics;
  */
 public class BottleSong {
 
+    int bottleTakenAtOnce;
+
     public BottleSong(int bottleTakenAtOnce) {
-        //TODO
+        if(bottleTakenAtOnce>99 | bottleTakenAtOnce<1) {
+            throw new IllegalArgumentException();
+        }
+        this.bottleTakenAtOnce=bottleTakenAtOnce;
+    }
+
+    public String getNumber(int bottleTakenAtOnce){
+        String number = "";
+
+        if (bottleTakenAtOnce > 19) {
+            switch (bottleTakenAtOnce / 10) {
+                case 2:
+                    number = "twenty "; break;
+                case 3:
+                    number = "thirty "; break;
+                case 4:
+                    number = "forty "; break;
+                case 5:
+                    number = "fifty "; break;
+                case 6:
+                    number = "sixty "; break;
+                case 7:
+                    number = "seventy "; break;
+                case 8:
+                    number = "eighty "; break;
+                case 9:
+                    number = "ninety "; break;
+            }
+        }
+
+        switch (bottleTakenAtOnce%10) {
+            case 1:
+                number += "one "; break;
+            case 2:
+                number += "two "; break;
+            case 3:
+                number += "three "; break;
+            case 4:
+                number += "four "; break;
+            case 5:
+                number += "five "; break;
+            case 6:
+                number += "six "; break;
+            case 7:
+                number += "seven "; break;
+            case 8:
+                number += "eight "; break;
+            case 9:
+                number += "nine "; break;
+        }
+        if(bottleTakenAtOnce>9 & bottleTakenAtOnce<20){
+            switch (bottleTakenAtOnce){
+                case 10:
+                    number += "ten "; break;
+                case 11:
+                    number = "eleven "; break;
+                case 12:
+                    number = "twelve "; break;
+                case 13:
+                    number = "thirteen "; break;
+                case 14:
+                    number = "fourteen "; break;
+                case 15:
+                    number = "fifteen "; break;
+                case 16:
+                    number = "sixteen "; break;
+                case 17:
+                    number = "seventeen "; break;
+                case 18:
+                    number = "eighteen "; break;
+                case 19:
+                    number = "nineteen "; break;
+            }
+        }
+
+        return number;
     }
 
     public String getBottleSongLyrics() {
-        //TODO
-        throw new UnsupportedOperationException();
+
+        String song="";
+        int bottlesOnTheWall=99;
+        String number = getNumber(bottleTakenAtOnce);
+
+        while (bottlesOnTheWall > bottleTakenAtOnce) {
+            song += bottlesOnTheWall + " bottles of beer on the wall, "
+                    + bottlesOnTheWall + " bottles of beer.\nTake "
+                    + number + "down and pass around, ";
+
+            bottlesOnTheWall -= bottleTakenAtOnce;
+            if(bottlesOnTheWall!=1) {
+                song += bottlesOnTheWall + " bottles of beer on the wall.\n";
+            }
+            else{
+                song += bottlesOnTheWall + " bottle of beer on the wall.\n";
+            }
+
+        }
+
+        number=getNumber(bottlesOnTheWall);
+
+
+        if(bottlesOnTheWall!=1) {
+            song += bottlesOnTheWall + " bottles of beer on the wall, " + bottlesOnTheWall + " bottles of beer.\nTake ";
+        }
+        else{
+            song += bottlesOnTheWall + " bottle of beer on the wall, " + bottlesOnTheWall + " bottle of beer.\nTake ";
+        }
+        song += number + "down and pass around, no more bottles of beer on the wall.\n" +
+                "No more bottles of beer on the wall, no more bottles of beer.\n" +
+                "Go to the store and buy some more, 99 bottles of beer on the wall.\n";
+
+
+        return song;
     }
 }
